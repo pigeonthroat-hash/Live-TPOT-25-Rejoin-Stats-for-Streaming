@@ -1,0 +1,47 @@
+<!-- ======================================================== -->
+<!-- 📥 PASTE YOUR ENTIRE STREAM CODE DIRECTLY BELOW THIS LINE -->
+<!-- ======================================================== -->
+
+
+
+
+<!-- ======================================================== -->
+<!-- 📤 PASTE YOUR ENTIRE STREAM CODE DIRECTLY ABOVE THIS LINE -->
+<!-- ======================================================== -->
+
+<!-- 🎵 INVISIBLE BACKGROUND MUSIC LOOPER (DO NOT EDIT BELOW THIS) -->
+<audio id="bg-audio-player" style="display: none;"></audio>
+<script>
+    // EDIT SONGS HERE: Put your exact MP3 file names in this list
+    const playlist = [
+        "song1.mp3",
+        "song2.mp3",
+        "song3.mp3"
+    ];
+
+    let currentTrackIndex = 0;
+    const player = document.getElementById('bg-audio-player');
+    let hasPlayed = false;
+
+    function loadAndPlayTrack(index) {
+        if(playlist.length === 0) return;
+        player.src = playlist[index];
+        player.play().catch(e => console.log("Waiting for user click to play music..."));
+    }
+
+    player.addEventListener('ended', () => {
+        currentTrackIndex++;
+        if (currentTrackIndex >= playlist.length) {
+            currentTrackIndex = 0;
+        }
+        loadAndPlayTrack(currentTrackIndex);
+    });
+
+    // Plays music automatically when the user clicks anywhere on your site
+    document.addEventListener('click', () => {
+        if (!hasPlayed) {
+            loadAndPlayTrack(currentTrackIndex);
+            hasPlayed = true;
+        }
+    }, { once: true }); // Runs only once
+</script>
